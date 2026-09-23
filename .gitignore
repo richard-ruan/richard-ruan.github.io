@@ -1,0 +1,5 @@
+# Build tool artifacts and local config (not needed for GitHub Pages)
+.project-config.json
+.manus-logs/
+node_modules/
+dist/
