@@ -1,0 +1,10 @@
+/* Site adjustments layered on top of the compiled bundle. */
+
+/* Homepage: scale the profile block and nav cards up on larger screens (phones unchanged) */
+@media (min-width: 768px) {
+  .landing-profile-block, .landing-cards { zoom: 1.12; }
+}
+
+@media (min-width: 1200px) {
+  .landing-profile-block, .landing-cards { zoom: 1.22; }
+}

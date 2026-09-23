@@ -9,6 +9,7 @@
   --acc-green: 110, 231, 183;
   --acc-pink: 251, 182, 206;
   --acc-purple: 192, 132, 252;
+  --pub-img-filter: brightness(0.88) contrast(0.95); /* dims paper thumbnails */
 }
 
 /* :root + attribute outranks the bundle's :root, .dark and :root:not(.light) rules */
@@ -20,6 +21,7 @@ html[data-theme="light"]:root {
   --acc-green: 4, 120, 87;
   --acc-pink: 190, 24, 93;
   --acc-purple: 126, 34, 206;
+  --pub-img-filter: none;
 
   --background: #f7f7f5;
   --foreground: #18181bee;
