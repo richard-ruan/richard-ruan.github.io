@@ -1,0 +1,141 @@
+/* Light/dark theme support.
+   Inline colors in the app bundle reference these RGB triplets,
+   e.g. rgba(var(--ink),0.52), so swapping them re-themes the whole site. */
+
+:root {
+  --ink: 255, 255, 255;
+  --shade: 10, 12, 20;
+  --acc: 126, 200, 244;
+  --acc-green: 110, 231, 183;
+  --acc-pink: 251, 182, 206;
+  --acc-purple: 192, 132, 252;
+}
+
+/* :root + attribute outranks the bundle's :root, .dark and :root:not(.light) rules */
+html[data-theme="light"]:root {
+  color-scheme: light;
+  --ink: 24, 24, 27;
+  --shade: 255, 255, 255;
+  --acc: 3, 105, 161;
+  --acc-green: 4, 120, 87;
+  --acc-pink: 190, 24, 93;
+  --acc-purple: 126, 34, 206;
+
+  --background: #f7f7f5;
+  --foreground: #18181bee;
+  --card: #18181b0a;
+  --card-foreground: #18181bee;
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+  --primary: #0369a1;
+  --primary-foreground: #ffffff;
+  --secondary: #18181b0d;
+  --secondary-foreground: #18181be0;
+  --muted: #18181b08;
+  --muted-foreground: #18181b99;
+  --accent: #18181b0d;
+  --accent-foreground: #18181bee;
+  --border: #18181b1a;
+  --input: #18181b1f;
+  --ring: #0369a1;
+  --glass-bg: #18181b08;
+  --glass-border: #18181b1a;
+  --glass-hover: #18181b10;
+  --text-primary: #18181b;
+  --text-secondary: #18181bb3;
+  --accent-blue: #0369a1;
+  --accent-purple: #7e22ce;
+  --accent-green: #047857;
+  --badge-green-text: #047857;
+  --badge-green-bg: #0478571a;
+  --badge-green-border: #04785740;
+  --badge-pink-text: #be185d;
+  --badge-pink-bg: #be185d1a;
+  --badge-pink-border: #be185d40;
+}
+
+html[data-theme="light"] body {
+  color: #18181bee;
+  background-color: #f7f7f5;
+  background-image: linear-gradient(#f7f7f5, #efefec 60%, #f7f7f5);
+}
+
+html[data-theme="light"] .table-scroll-hint::after {
+  background: linear-gradient(90deg, transparent, #f7f7f5d9);
+}
+
+/* Links inside the landing-page bio */
+.bio-link {
+  color: rgb(var(--acc));
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--acc), 0.35);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+
+.bio-link:hover {
+  text-decoration-color: rgb(var(--acc));
+}
+
+/* Brief color cross-fade while switching; removed again by theme-toggle.js */
+html.theme-switching,
+html.theme-switching * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* The switch: a round button in the bottom-right corner */
+.theme-toggle {
+  position: fixed;
+  right: 24px;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  z-index: 200;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--ink), 0.14);
+  background: rgba(var(--shade), 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: rgba(var(--ink), 0.65);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+  background: rgba(var(--acc), 0.15);
+  border-color: rgba(var(--acc), 0.35);
+  color: rgb(var(--acc));
+  transform: translateY(-2px);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid rgb(var(--acc));
+  outline-offset: 2px;
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.4s ease;
+}
+
+.theme-toggle:active svg {
+  transform: rotate(30deg);
+}
+
+/* Show the icon for the mode you'd switch *to* */
+html[data-theme="light"] .theme-toggle .icon-sun,
+html:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-switching,
+  html.theme-switching *,
+  .theme-toggle,
+  .theme-toggle svg {
+    transition: none !important;
+  }
+}
