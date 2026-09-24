@@ -8,3 +8,135 @@
 @media (min-width: 1200px) {
   .landing-profile-block, .landing-cards { zoom: 1.22; }
 }
+
+/* Research: logos float slightly above their cards */
+[data-loc="client/src/pages/Research.tsx:286"] {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="light"] [data-loc="client/src/pages/Research.tsx:286"] {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Research: one continuous timeline line, dots on it, and a short tick from each dot to its card */
+:root {
+  --tl-line: rgba(var(--ink), 0.35);
+  --tl-dot: #8a8a8f;
+  --tl-block-bg: rgba(var(--ink), 0.055);
+}
+html[data-theme="light"] {
+  --tl-dot: #8c8c88;
+  --tl-block-bg: #fcfcfb;
+}
+
+[data-loc="client/src/pages/Research.tsx:195"] { align-items: stretch !important; }
+
+.timeline-connector-col { position: relative; }
+
+/* vertical line: spans the whole row (including the gap below the card) */
+.timeline-connector-col::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 0.5px);
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--tl-line);
+}
+/* start at the first dot, end at the last dot */
+[data-loc="client/src/pages/Research.tsx:491"] > :first-child .timeline-connector-col::before { top: 25px; }
+[data-loc="client/src/pages/Research.tsx:491"] > :last-child .timeline-connector-col::before { bottom: auto; height: 25px; }
+
+/* tick from the dot to the card */
+.timeline-connector-col::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 0;
+  top: 24.5px;
+  height: 1px;
+  background: var(--tl-line);
+}
+
+/* per-row line segments replaced by the continuous line */
+[data-loc="client/src/pages/Research.tsx:250"] { display: none !important; }
+
+/* dots sit on top of the line; inactive dots are solid so the line doesn't show through */
+[data-loc="client/src/pages/Research.tsx:238"] { position: relative; z-index: 1; }
+[data-loc="client/src/pages/Research.tsx:238"]:not([style*="rgb(var(--acc))"]) {
+  background: var(--tl-dot) !important;
+  border-color: var(--tl-dot) !important;
+}
+
+/* Darker dates for contrast */
+[data-loc="client/src/pages/Research.tsx:205"] { color: rgba(var(--ink), 0.82) !important; }
+[data-loc="client/src/pages/Research.tsx:216"] { color: rgba(var(--ink), 0.64) !important; }
+
+/* Long block behind the dates and line, level with the tables on Publications/Presentations */
+@media (min-width: 601px) {
+  .research-timeline { position: relative; }
+  .research-timeline::before {
+    content: "";
+    position: absolute;
+    left: 28px;          /* container's side padding = content edge */
+    top: 0;              /* top of the first card */
+    bottom: 80px;        /* container's bottom padding = bottom of the last card */
+    width: 148px;        /* dates + line, stopping just short of the cards */
+    background: var(--tl-block-bg);
+    border: 1px solid rgba(var(--ink), 0.10);
+    border-radius: 12px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  .research-timeline > * { position: relative; z-index: 1; }
+
+  /* 148px block: ~32px left margin, dates end at 86px, line at 100px,
+     connector column spans to the cards (which start at 160px) */
+  .timeline-date-col { width: 86px !important; }
+  .timeline-connector-col {
+    width: 74px !important;
+    align-items: flex-start !important;
+    padding-left: 9px;
+  }
+  .timeline-connector-col::before { left: 13.5px; }
+  .timeline-connector-col::after { left: 14px; }
+}
+
+/* Research on phones: stacked full-width cards joined by a short line,
+   compact logo beside the title/org with everything else full width below */
+@media (max-width: 600px) {
+  .timeline-connector-col { display: none !important; }
+
+  /* short connector in the gap between consecutive cards, under the logo */
+  [data-loc="client/src/pages/Research.tsx:195"] { position: relative; }
+  .research-timeline > :not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 35px;          /* card padding (12px) + half the logo */
+    bottom: 0;
+    height: 16px;        /* the gap between cards */
+    width: 2px;
+    background: var(--tl-line);
+  }
+
+  [data-loc="client/src/pages/Research.tsx:270"] { padding: 14px 14px 14px 12px !important; }
+
+  [data-loc="client/src/pages/Research.tsx:284"] {
+    display: grid !important;
+    grid-template-columns: 48px 1fr;
+    gap: 0 12px !important;   /* inline gap would otherwise also space the rows */
+    align-items: center;
+  }
+  [data-loc="client/src/pages/Research.tsx:309"] { display: contents; }
+  [data-loc="client/src/pages/Research.tsx:286"] {
+    grid-row: span 2;
+    width: 48px !important;
+    height: 48px !important;
+    padding: 5px !important;
+    border-radius: 10px !important;
+    margin-top: 0 !important;
+  }
+  /* date, tag, note and links span the full card width under the header */
+  [data-loc="client/src/pages/Research.tsx:309"] > :nth-child(n+3) { grid-column: 1 / -1; justify-self: start; }
+  [data-loc="client/src/pages/Research.tsx:335"] { margin-top: 10px; }
+}
