@@ -10,21 +10,39 @@
   --acc-pink: 251, 182, 206;
   --acc-purple: 192, 132, 252;
   --pub-img-filter: brightness(0.88) contrast(0.95); /* dims paper thumbnails */
+
+  /* Tag/badge background tints; same as the text accents in dark mode */
+  --acc-tint: var(--acc);
+  --acc-green-tint: var(--acc-green);
+  --acc-pink-tint: var(--acc-pink);
+  --acc-purple-tint: var(--acc-purple);
+  --tint-k: 1;
 }
 
 /* :root + attribute outranks the bundle's :root, .dark and :root:not(.light) rules */
 html[data-theme="light"]:root {
   color-scheme: light;
-  --ink: 24, 24, 27;
+  --ink: 0, 0, 0;
   --shade: 255, 255, 255;
-  --acc: 3, 105, 161;
-  --acc-green: 4, 120, 87;
-  --acc-pink: 190, 24, 93;
-  --acc-purple: 126, 34, 206;
+  --acc: 7, 89, 133;
+  --acc-green: 6, 95, 70;
+  --acc-pink: 157, 23, 77;
+  --acc-purple: 107, 33, 168;
   --pub-img-filter: none;
 
-  --background: #f7f7f5;
-  --foreground: #18181bee;
+  /* Brighter, more saturated tag backgrounds */
+  --acc-tint: 14, 165, 233;
+  --acc-green-tint: 16, 185, 129;
+  --acc-pink-tint: 236, 72, 153;
+  --acc-purple-tint: 168, 85, 247;
+  --tint-k: 1.5;
+
+  /* Page is darker than the blocks/tables that sit on it */
+  --surface: #fcfcfb;
+  --surface-head: #f3f3f1;
+
+  --background: #e8e8e5;
+  --foreground: #09090bf2;
   --card: #18181b0a;
   --card-foreground: #18181bee;
   --popover: #ffffff;
@@ -57,13 +75,40 @@ html[data-theme="light"]:root {
 }
 
 html[data-theme="light"] body {
-  color: #18181bee;
-  background-color: #f7f7f5;
-  background-image: linear-gradient(#f7f7f5, #efefec 60%, #f7f7f5);
+  color: #09090bf2;
+  background-color: #e8e8e5;
+  background-image: linear-gradient(#ebebe8, #e3e3e0 60%, #ebebe8);
 }
 
 html[data-theme="light"] .table-scroll-hint::after {
-  background: linear-gradient(90deg, transparent, #f7f7f5d9);
+  background: linear-gradient(90deg, transparent, #fcfcfbd9);
+}
+
+/* Light mode: blocks and tables are brighter than the page (inline styles, hence !important) */
+html[data-theme="light"] [data-loc="client/src/pages/Research.tsx:270"],
+html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:406"],
+html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:458"],
+html[data-theme="light"] [data-loc="client/src/pages/Presentations.tsx:396"],
+html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:pub-card"],
+html[data-theme="light"] [data-loc="client/src/pages/Presentations.tsx:538"],
+html[data-theme="light"] [data-loc="client/src/pages/Landing.tsx:371"],
+html[data-theme="light"] [data-loc="client/src/pages/Landing.tsx:171"],
+html[data-theme="light"] [data-loc="client/src/pages/Landing.tsx:285"] {
+  background: var(--surface) !important;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+html[data-theme="light"] [data-loc="client/src/pages/Research.tsx:270"]:hover,
+html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:458"]:hover,
+html[data-theme="light"] [data-loc="client/src/pages/Landing.tsx:371"]:hover {
+  background: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Table header rows */
+html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:421"],
+html[data-theme="light"] [data-loc="client/src/pages/Presentations.tsx:553"] {
+  background: var(--surface-head) !important;
 }
 
 /* Links inside the landing-page bio */
