@@ -9,13 +9,17 @@
   .landing-profile-block, .landing-cards { zoom: 1.22; }
 }
 
-/* Research: logos float slightly above their cards */
+/* Research: logos float slightly above their cards.
+   Dark mode adds a faint light rim so dark tiles (UCSF navy, USC red) visibly lift off the dark card too. */
 [data-loc="client/src/pages/Research.tsx:286"] {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 6px 16px rgba(0, 0, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.45);
 }
 
 html[data-theme="light"] [data-loc="client/src/pages/Research.tsx:286"] {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 /* Research: one continuous timeline line, dots on it, and a short tick from each dot to its card */
