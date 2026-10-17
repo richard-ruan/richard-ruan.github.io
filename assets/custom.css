@@ -26,12 +26,15 @@ html[data-theme="light"] [data-loc="client/src/pages/Research.tsx:286"] {
 }
 
 /* Research: one continuous timeline line, dots on it, and a short tick from each dot to its card */
+/* Solid (not translucent) line color: the line is drawn as one piece per row, and solid
+   pieces can overlap without visible seams, which used to flicker when cards were hovered */
 :root {
-  --tl-line: rgba(var(--ink), 0.35);
+  --tl-line: #6a6a6e;
   --tl-dot: #8a8a8f;
   --tl-block-bg: rgba(var(--ink), 0.055);
 }
 html[data-theme="light"] {
+  --tl-line: #a5a5a2;
   --tl-dot: #8c8c88;
   --tl-block-bg: #fcfcfb;
 }
@@ -45,14 +48,14 @@ html[data-theme="light"] {
   content: "";
   position: absolute;
   left: calc(50% - 0.5px);
-  top: 0;
-  bottom: 0;
+  top: -1px;               /* overlap the neighbouring rows' pieces by 1px: no seams */
+  bottom: -1px;
   width: 1px;
   background: var(--tl-line);
 }
 /* start at the first dot, end at the last dot */
 [data-loc="client/src/pages/Research.tsx:491"] > :first-child .timeline-connector-col::before { top: 25px; }
-[data-loc="client/src/pages/Research.tsx:491"] > :last-child .timeline-connector-col::before { bottom: auto; height: 25px; }
+[data-loc="client/src/pages/Research.tsx:491"] > :last-child .timeline-connector-col::before { bottom: auto; height: 26px; }
 
 /* tick from the dot to the card */
 .timeline-connector-col::after {
@@ -60,7 +63,7 @@ html[data-theme="light"] {
   position: absolute;
   left: 50%;
   right: 0;
-  top: 24.5px;
+  top: 24px;
   height: 1px;
   background: var(--tl-line);
 }
@@ -92,21 +95,31 @@ html[data-theme="light"] {
     background: var(--tl-block-bg);
     border: 1px solid rgba(var(--ink), 0.10);
     border-radius: 12px;
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
   }
   .research-timeline > * { position: relative; z-index: 1; }
 
   /* 148px block: ~32px left margin, dates end at 86px, line at 100px,
-     connector column spans to the cards (which start at 160px) */
+     connector column spans to the cards, which start at 184px (36px clear of the block);
+     the cards' right edge stays at the content edge, so overall width matches other pages */
   .timeline-date-col { width: 86px !important; }
   .timeline-connector-col {
-    width: 74px !important;
+    width: 98px !important;
     align-items: flex-start !important;
     padding-left: 9px;
   }
-  .timeline-connector-col::before { left: 13.5px; }
+  .timeline-connector-col::before { left: 13px; }   /* whole pixels keep the line crisp */
   .timeline-connector-col::after { left: 14px; }
+
+  /* Dot, tick and dates line up with the vertical center of the logo (59px below the card top:
+     1px border + 18px card padding + 2px logo margin + half of the 76px logo) */
+  .timeline-connector-col { padding-top: 54px !important; }           /* 10px dot -> center at 59px */
+  .timeline-connector-col::after { top: 58px; }                       /* 1px tick through the dot center */
+  [data-loc="client/src/pages/Research.tsx:491"] > :first-child .timeline-connector-col::before { top: 59px; }
+  [data-loc="client/src/pages/Research.tsx:491"] > :last-child .timeline-connector-col::before { height: 60px; }
+  .timeline-date-col { padding-top: 44px !important; }                /* ~30px two-line date centered on 59px */
+
+  /* Same 36px spacing between cards as between the timeline block and the cards */
+  .research-timeline > :not(:last-child) [data-loc="client/src/pages/Research.tsx:263"] { margin-bottom: 36px !important; }
 }
 
 /* Research on phones: stacked full-width cards joined by a short line,
