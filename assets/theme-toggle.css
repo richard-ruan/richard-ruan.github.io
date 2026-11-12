@@ -84,31 +84,57 @@ html[data-theme="light"] .table-scroll-hint::after {
   background: linear-gradient(90deg, transparent, #fcfcfbd9);
 }
 
-/* Light mode: blocks and tables are brighter than the page (inline styles, hence !important) */
-html[data-theme="light"] [data-loc="client/src/pages/Research.tsx:270"],
-html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:406"],
-html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:458"],
-html[data-theme="light"] [data-loc="client/src/pages/Presentations.tsx:396"],
-html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:pub-card"],
-html[data-theme="light"] [data-loc="client/src/pages/Presentations.tsx:538"],
-html[data-theme="light"] [data-loc="client/src/pages/Landing.tsx:371"],
-html[data-theme="light"] [data-loc="client/src/pages/Landing.tsx:171"],
-html[data-theme="light"] [data-loc="client/src/pages/Landing.tsx:285"] {
-  background: var(--surface) !important;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+/* Floating glass: blocks and tables are translucent frosted panels with a bright edge,
+   a top highlight and a soft shadow (inline styles in the bundle, hence !important) */
+:root {
+  --glass-fill: rgba(255, 255, 255, 0.06);
+  --glass-fill-hover: rgba(255, 255, 255, 0.09);
+  --glass-head: rgba(255, 255, 255, 0.04);
+  --glass-edge: rgba(255, 255, 255, 0.13);
+  --glass-highlight: rgba(255, 255, 255, 0.10);
+  --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.30);
+  --glass-shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+html[data-theme="light"]:root {
+  --glass-fill: rgba(255, 255, 255, 0.55);
+  --glass-fill-hover: rgba(255, 255, 255, 0.72);
+  --glass-head: rgba(255, 255, 255, 0.35);
+  --glass-edge: rgba(255, 255, 255, 0.80);
+  --glass-highlight: rgba(255, 255, 255, 0.95);
+  --glass-shadow: 0 12px 32px rgba(40, 60, 110, 0.12), 0 2px 8px rgba(40, 60, 110, 0.08);
+  --glass-shadow-hover: 0 18px 40px rgba(40, 60, 110, 0.18), 0 4px 10px rgba(40, 60, 110, 0.10);
 }
 
-html[data-theme="light"] [data-loc="client/src/pages/Research.tsx:270"]:hover,
-html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:458"]:hover,
-html[data-theme="light"] [data-loc="client/src/pages/Landing.tsx:371"]:hover {
-  background: #ffffff !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+html [data-loc="client/src/pages/Research.tsx:270"],
+html [data-loc="client/src/pages/Home.tsx:406"],
+html [data-loc="client/src/pages/Home.tsx:458"],
+html [data-loc="client/src/pages/Presentations.tsx:396"],
+html [data-loc="client/src/pages/Home.tsx:pub-card"],
+html [data-loc="client/src/pages/Presentations.tsx:538"],
+html [data-loc="client/src/pages/Landing.tsx:371"],
+html [data-loc="client/src/pages/Landing.tsx:171"],
+html [data-loc="client/src/pages/Landing.tsx:285"] {
+  background: var(--glass-fill) !important;
+  border: 1px solid var(--glass-edge) !important;
+  box-shadow: inset 0 1px 0 var(--glass-highlight), var(--glass-shadow) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.25s, transform 0.25s;
 }
 
-/* Table header rows */
-html[data-theme="light"] [data-loc="client/src/pages/Home.tsx:421"],
-html[data-theme="light"] [data-loc="client/src/pages/Presentations.tsx:553"] {
-  background: var(--surface-head) !important;
+/* Cards lift a little more on hover */
+html [data-loc="client/src/pages/Research.tsx:270"]:hover,
+html [data-loc="client/src/pages/Home.tsx:458"]:hover,
+html [data-loc="client/src/pages/Landing.tsx:371"]:hover {
+  background: var(--glass-fill-hover) !important;
+  box-shadow: inset 0 1px 0 var(--glass-highlight), var(--glass-shadow-hover) !important;
+  transform: translateY(-2px);
+}
+
+/* Table header rows: a lighter tint of the same glass */
+html [data-loc="client/src/pages/Home.tsx:421"],
+html [data-loc="client/src/pages/Presentations.tsx:553"] {
+  background: var(--glass-head) !important;
 }
 
 /* Links inside the landing-page bio */
