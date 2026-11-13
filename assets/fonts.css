@@ -1,0 +1,7 @@
+/* Avenir everywhere: Avenir Next/Avenir on Apple devices, Nunito Sans (closest free match) elsewhere */
+:root, html[data-theme="light"]:root {
+  --font-sans: "Avenir Next", "Avenir", "Nunito Sans", system-ui, sans-serif;
+  --font-display: "Avenir Next", "Avenir", "Nunito Sans", system-ui, sans-serif;
+  --font-mono: "Avenir Next", "Avenir", "Nunito Sans", system-ui, sans-serif;
+}
+body { font-family: var(--font-sans); }

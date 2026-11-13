@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>Richard Ruan</title>
-    <meta name="description" content="Richard Ruan — PhD student in Cell and Molecular Biology at Duke University. Publications, research experience, and presentations in tissue engineering, cardiovascular genetics, gene therapy, and infectious disease." />
+    <meta name="description" content="Richard Ruan — PhD student in Cell and Molecular Biology at Duke University. Publications, research experience, presentations, and awards in tissue engineering, cardiovascular genetics, gene therapy, and infectious disease." />
 
     <!-- Open Graph / LinkedIn / Facebook -->
     <meta property="og:type" content="website" />
@@ -40,19 +40,32 @@
       src="https://manus-analytics.com"
       data-website-id="bf996d75-5058-4e16-bf6c-4cfa60e3e9d3"
     ></script>
-    <!-- Theme: apply saved light/dark choice before first paint (default: dark) -->
+    <!-- Theme: the site is dark-only for now. All light-mode code is kept
+         (theme-toggle.css/.js, light rules in custom.css); set LIGHT_MODE_ENABLED
+         to true to bring back the switch and the visitor's saved choice. -->
     <script>
+      window.LIGHT_MODE_ENABLED = false;
       try {
-        if (localStorage.getItem("site-theme") === "light") {
+        if (window.LIGHT_MODE_ENABLED && localStorage.getItem("site-theme") === "light") {
           document.documentElement.setAttribute("data-theme", "light");
         }
       } catch (e) {}
     </script>
-    <script type="module" crossorigin src="/assets/index-SnGvZyNJ.js?v=20"></script>
+    <script type="module" crossorigin src="/assets/index-SnGvZyNJ.js?v=31"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CJahk2Fp.css">
     <link rel="stylesheet" href="/assets/theme-toggle.css?v=5">
-    <link rel="stylesheet" href="/assets/custom.css?v=28">
-    <script defer src="/assets/theme-toggle.js?v=1"></script>
+    <link rel="stylesheet" href="/assets/custom.css?v=33">
+    <!-- Avenir everywhere (Apple devices); Nunito Sans is the fallback elsewhere -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300..800&display=swap" />
+    <link rel="stylesheet" href="/assets/fonts.css?v=1">
+    <script>
+      if (window.LIGHT_MODE_ENABLED) {
+        var t = document.createElement("script");
+        t.defer = true;
+        t.src = "/assets/theme-toggle.js?v=1";
+        document.head.appendChild(t);
+      }
+    </script>
       <script>
       // SPA redirect for GitHub Pages
       (function(l) {
